@@ -426,6 +426,9 @@ window.OCA.RichDocuments = {
 			templateId,
 			shareOwnerId
 		})
+	},
+	FilesAppIntegration: {
+		registerHandler: FilesAppIntegration.registerHandler.bind(FilesAppIntegration)
 	}
 }
 
@@ -479,9 +482,7 @@ $(document).ready(function() {
 			})
 			break
 		case 'File_Rename':
-			FileList.reload()
-			OC.Apps.hideAppSidebar()
-			FilesAppIntegration.fileName = args.NewName
+			FilesAppIntegration.rename(args.NewName)
 			break
 		case 'close':
 			odfViewer.onClose()
@@ -523,5 +524,4 @@ $(document).ready(function() {
 		}
 
 	})
-	window.FilesAppIntegration = FilesAppIntegration
 })
