@@ -392,7 +392,7 @@ const documentsMain = {
 		var fileId
 
 		// Does anything indicate that we need to autostart a session?
-		fileId = window.getURLParameter('fileId').replace(/^\W*/, '')
+		fileId = (getSearchParam('fileId') || '').replace(/^\W*/, '')
 
 		if (fileId && Number.isInteger(Number(fileId)) && $('#nickname').length === 0) {
 			documentsMain.isEditorMode = true
