@@ -172,7 +172,6 @@ class SettingsController extends Controller{
 		}
 
 		$this->discoveryManager->refretch();
-		$this->capabilitiesService->clear();
 		try {
 			$capaUrlSrc = $this->wopiParser->getUrlSrc('Capabilities');
 			if (is_array($capaUrlSrc) && $capaUrlSrc['action'] === 'getinfo') {
@@ -195,7 +194,12 @@ class SettingsController extends Controller{
 		}
 
 		$this->capabilitiesService->clear();
-		$this->capabilitiesService->refretch();
+		if ($this->capabilitiesService->refretch() === []) {
+			return new JSONResponse([
+				'status' => 'error',
+				'data' => ['message' => 'Failed to connect to the remote server', 'hint' => 'missing_capabilities']
+			], 500);
+		}
 
 		$response = [
 			'status' => 'success',

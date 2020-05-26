@@ -102,6 +102,8 @@ class CapabilitiesService {
 			$file = $this->getFile();
 			$file->putContent(json_encode($capabilties));
 		}
+
+		return $capabilties;
 	}
 
 	private function renewCapabilities() {

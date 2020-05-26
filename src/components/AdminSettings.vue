@@ -409,6 +409,9 @@ export default {
 			} catch (e) {
 				console.error(e)
 				this.serverError = SERVER_STATE_CONNECTION_ERROR
+				if (e.response.data.hint !== '') {
+					OCP.Toast.warning('Could not connect to the /hosting/capabilities endpoint. Please check if your webserver configuration is up to date.');
+				}
 			}
 			this.checkIfDemoServerIsActive()
 		},
